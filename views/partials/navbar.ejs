@@ -1,0 +1,55 @@
+    <% const dis = new Set(); %>
+      <% for (let i = 0; i < locations.length; i++) { %>
+      <% dis.add(locations[i]['district']); %>
+      <% } %>
+      <% district = [...dis]; %>
+      <% district.sort(); %>
+      
+      <% const gen = new Set(); %>
+      <% for (let i = 0; i < games.length; i++) { %>
+      <% gen.add(games[i]['genre']); %>
+      <% } %>
+      <% genre = [...gen]; %>
+      <% genre.sort(); %>
+      
+      <% games.sort((a, b) => { %>
+      <% if (a.title < b.title) { return -1; } %>
+      <% if (a.title > b.title) { return 1; } %>
+      <% }); %>
+        <nav class="navbar fixed-top navbar-expand-md navbar-light bg-light">
+            <a class="navbar-brand" href="/">
+                <img src="/img/arcade_machine.svg" alt="logo" height="40" width="50"> K-ARCADE
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      지역별
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <% for (let i = 0; i < district.length; i++) { %>
+                        <a class="dropdown-item" href="/location/<%= `${district[i]}` %>"><%= district[i] %></a>
+                      <% } %>
+                    </div>
+                  </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      장르별
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <% for (let i = 0; i < genre.length; i++) { %>
+                        <a class="dropdown-item" href="/genre/<%= `${genre[i]}` %>"><%= genre[i] %></a>
+                      <% } %>
+                    </div>
+                  </li>
+              </ul>
+              <form class="form-inline my-2 my-lg-0" action="/search" method="GET">
+                <input class="form-control mr-sm-2" type="search" name="keyword" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
+            </div>
+        </nav>

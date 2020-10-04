@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<html>
+    <head>
+        <title>K-ARCADE</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    </head>
+    <body>
+        <%- include("partials/navbar") %>
+        <div class="container-fluid pt-4 mt-5">
+          <% if (genreFilter !== "") { %>
+            <div class="row justify-content-center m-2">
+              <h2><strong><%= genreFilter %></strong></h2>
+            </div>
+            <% } %>
+            <% for (let k = 0; k < games.length; k += 4) { %>
+              <div class="row justify-content-center">
+              <% for (let j = 0; j < 4; j++) { %>
+                <%if (k+j >= games.length) { break; }; %>
+                  <% const i = j + k; %>
+                  <%if (genreFilter !== "" && genreFilter !== games[i]['genre']) { %>
+                  <% k++; %>
+                  <% j--; %>    
+                  <% continue; %>
+                <% }; %>
+                <div class="card col-lg" style="max-width: 25rem; margin: 0.5rem">
+                  <img class="card-img-top" src="<%= `${games[i]['image']}` %>" alt="Card image cap" style="height: 14rem;">
+                  <div class="card-body">
+                    <h5 class="card-title"><%= `${games[i]['title']}` %></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><%= `${games[i]['company']}` %></h6>
+                    <p class="card-subtitle mb-2 text-muted" style="font-size: 0.75rem;"><%= `${games[i]['genre']}` %></p>
+                    <p class="card-subtitle"><a href="/game/<%= `${games[i]['title']}` %>">보유 오락실 찾기</a></p>
+                  </div>
+                </div>
+              <% } %>
+            </div>
+          <% } %>
+        </div>
+          
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    </body>
+</html>
