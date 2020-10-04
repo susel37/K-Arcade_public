@@ -1,6 +1,6 @@
 # K-Arcade
 
-# 주소
+## 주소
 - https://karcade.herokuapp.com/
  - heroku를 통해 호스팅을 하고 있어 최초 접속에 다소 시간이 걸릴 수 있습니다.
 
